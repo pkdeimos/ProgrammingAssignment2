@@ -36,22 +36,23 @@ makeCacheMatrix <- function(x = matrix()) {
 ## else, calculates inverse, stores in cache and returns it
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-    if(class(x$get())!="matrix")
-    {
+    
+    ## Capture errors due to invalid input
+    if(class(x$get())!="matrix") {
         print("Input is not a valid matrix!")
         return(-1)
     }
-    if(ncol(x$get())!=nrow(x$get()))
-    {
+    if(ncol(x$get())!=nrow(x$get())) {
         print("Input matrix is not inversible. Input should be a square matrix!")
         return(-1)
     }
+    
     invx <- x$getinv()
     if(!is.null(invx)) {
         message("getting cached data 1")
         return(invx)
     }
+    
     data <- x$get()
     invx <- solve(data)
     x$setinv(invx)
